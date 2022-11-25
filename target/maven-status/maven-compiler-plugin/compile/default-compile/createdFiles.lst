@@ -1,0 +1,16 @@
+Domain\Empleado.class
+Domain\Tarea.class
+Data\EquipoDAO.class
+Data\ConexionBD.class
+Data\EmpleadoDAO.class
+Domain\Prospecto.class
+Domain\Proyecto.class
+Data\TareasDAO.class
+Domain\Equipo.class
+Data\ClienteDAO.class
+Data\ProyectoDAO.class
+org\cristian\mx\abstractosfinal\resources\JavaEE8Resource.class
+Domain\Cliente.class
+Data\ProspectoDAO.class
+Servlets\ServletControlador.class
+org\cristian\mx\abstractosfinal\JAXRSConfiguration.class
