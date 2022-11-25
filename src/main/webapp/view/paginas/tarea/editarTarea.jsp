@@ -46,7 +46,7 @@
                         border-radius: 5px;
                         margin-right: 2rem;
                         "
-                    class="btn-eliminar" href="#">Eliminar</a>    
+                    class="btn-eliminar" href="${pageContext.request.contextPath}/ServletControlador?accion=eliminarTarea&idTarea=${tarea.idTarea}">Eliminar</a>
                 </div>  
             </div>
 

@@ -13,7 +13,10 @@ import Domain.Proyecto;
 import Domain.Tarea;
 import java.io.IOException;
 import static java.lang.Boolean.valueOf;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,8 +39,20 @@ public class ServletControlador extends HttpServlet {
             switch (accion) {
                 case "editarProyecto":
                     this.editarProyecto(request, response);
+                    break;
                 case "editarTarea":
                     this.editarTarea(request, response);
+                    break;
+                case "eliminarTarea":
+                {
+                    try {
+                        this.eliminarTarea(request, response);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ServletControlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
+
                 default:
                     this.accionDefault(request, response);
             }
@@ -103,6 +118,22 @@ public class ServletControlador extends HttpServlet {
         // ingresamos la dirección del jsp al que se quiere ir
         String jspEditar = "/view/paginas/tarea/editarTarea.jsp";
         request.getRequestDispatcher(jspEditar).forward(request, response);
+    }
+    
+    private void eliminarTarea(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        //recuperamos los valores del formulario editarTarea
+        int idTarea = Integer.parseInt(request.getParameter("idTarea"));
+     
+        //Creamos el objeto de tarea (modelo)
+        Tarea tarea = new Tarea(idTarea);
+
+        //Eliminamos el  objeto en la base de datos
+        String registrosModificados = new TareasDAO().eliminar(tarea);
+        System.out.println("registrosModificados = " + registrosModificados);
+
+        //Redirigimos hacia accion por default
+        this.accionDefault(request, response);
     }
         
         @Override
