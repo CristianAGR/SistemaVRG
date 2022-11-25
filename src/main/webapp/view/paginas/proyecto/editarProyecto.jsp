@@ -84,11 +84,7 @@
                             <div style="display: block;" id="empleados">
                                 <p class="label-modal">Responsable</p>
                                 
-                                <select  style="width: 100%;margin-bottom: 1.5rem;"class="modal-input" name="idEmpleado" required>
-                                    <option class="option-modal" value="1">${proyecto.nombre}</option>
-                                    <option class="option-modal" value="2">Ricardo2</option>
-                                    <option class="option-modal" value="3">Ricardo3</option>
-                                    
+                                <select  style="width: 100%;margin-bottom: 1.5rem;"class="modal-input" name="idEmpleado" required>                                    
                                     <c:forEach var="empleado" items="${empleados}" varStatus="status" >
                                     <option class="option-modal" value="${empleado.idEmpleado}">${empleado.nombre}</option>
                                     </c:forEach>
