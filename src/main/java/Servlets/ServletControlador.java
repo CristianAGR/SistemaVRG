@@ -37,7 +37,7 @@ public class ServletControlador extends HttpServlet {
                 case "editarProyecto":
                     this.editarProyecto(request, response);
                 case "editarTarea":
-                    this.editarProyecto(request, response);
+                    this.editarTarea(request, response);
                 default:
                     this.accionDefault(request, response);
             }
@@ -70,17 +70,38 @@ public class ServletControlador extends HttpServlet {
         response.sendRedirect("menu.jsp");
     }
         
-        private void editarProyecto(HttpServletRequest request, HttpServletResponse response)
+    private void editarProyecto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos el idProyecto
         int idProyecto = Integer.parseInt(request.getParameter("idProyecto"));
         Proyecto proyecto = new ProyectoDAO().seleccionarProyecto(idProyecto);
+        // hacemos una lista de los empleados
         List<Empleado> empleados = new EmpleadoDAO().seleccionarEmpleados();
+        // hacemos una lista de las tareas con el mismo id de Proyecto
         List<Tarea> tareas = new TareasDAO().seleccionarTareasIdProyecto(idProyecto);
+        // enviamos los atributos
         request.setAttribute("proyecto", proyecto);
         request.setAttribute("tareas", tareas);
         request.setAttribute("empleados", empleados);
+        
+        // ingresamos la dirección del jsp al que se quiere ir
         String jspEditar = "/view/paginas/proyecto/editarProyecto.jsp";
+        request.getRequestDispatcher(jspEditar).forward(request, response);
+    }
+    
+    private void editarTarea(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //recuperamos el idTarea
+        int idTarea = Integer.parseInt(request.getParameter("idTarea"));
+        Tarea tarea = new TareasDAO().seleccionarTarea(idTarea);
+        // hacemos una lista de los empleados
+        List<Empleado> empleados = new EmpleadoDAO().seleccionarEmpleados();
+        // enviamos el atributo
+        request.setAttribute("tarea", tarea);
+        request.setAttribute("empleados", empleados);
+        
+        // ingresamos la dirección del jsp al que se quiere ir
+        String jspEditar = "/view/paginas/tarea/editarTarea.jsp";
         request.getRequestDispatcher(jspEditar).forward(request, response);
     }
         

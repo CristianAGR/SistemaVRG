@@ -173,12 +173,12 @@
                             
                             <div style="display: block;">
                                 <p class="label-modal">Fecha de inicio</p>
-                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" required value="${proyecto.fechaInicio}">
+                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date"  value="${proyecto.fechaInicio}">
                             </div>
     
                             <div style="display: block;">
                                 <p class="label-modal">Fecha de finalización</p>
-                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" >
+                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" value="${proyecto.fechaFin}">
                             </div>
                             <div style="display: block;">
                                 <p class="label-modal">Cliente</p>
@@ -230,7 +230,11 @@
                             <c:if  test="${tarea.finalizado == false}" >
                                 <p class="text-table">No Finalizado</p>
                             </c:if>
-                            <a class="btn-editar-tarea" href="#">Editar</a>
+                            <a tyle="text-decoration: none" 
+                               class="btn-editar-tarea" 
+                               href="${pageContext.request.contextPath}/ServletControlador?accion=editarTarea&idTarea=${tarea.idTarea}">
+                                Editar
+                            </a>
                         </div>
                         </c:forEach>
                        
