@@ -145,6 +145,9 @@ public class ServletControlador extends HttpServlet {
                 case "insertarTarea":
                     this.insertarTarea(request, response);
                     break;
+                case "updateTarea":
+                    this.updateTarea(request, response);
+                    break;
                 default:
                     this.accionDefault(request, response);
             }
@@ -155,7 +158,7 @@ public class ServletControlador extends HttpServlet {
     
     private void insertarTarea(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //recuperamos los valores del formulario agregarCliente
+        //recuperamos los valores del formulario agregarTarea
         String nombre = request.getParameter("nombre");
         String descripcion = request.getParameter("descripcion");
         String fechaInicio = request.getParameter("fechaInicio");
@@ -169,6 +172,30 @@ public class ServletControlador extends HttpServlet {
         //Tarea tarea = new Tarea("tarea1", "tarea1", "07/12/22", "07/02/23", false,   1, 1);
         //Insertamos el nuevo objeto en la base de datos
         String registrosModificados = new TareasDAO().insertar(tarea);
+        System.out.println("registrosModificados = " + registrosModificados);
+
+        //Redirigimos hacia accion por default
+        this.accionDefault(request, response);
+    }
+    
+        private void updateTarea(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            
+            //recuperamos los valores del formulario editarTarea
+        int idTarea = Integer.parseInt(request.getParameter("idTarea"));
+        String nombre = request.getParameter("nombre");
+        String descripcion = request.getParameter("descripcion");
+        String fechaInicio = request.getParameter("fechaInicio");
+        String fechaFin = request.getParameter("fechaFin");
+        int idProyecto = Integer.parseInt(request.getParameter("idProyecto"));
+        int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
+        boolean finalizado = valueOf(request.getParameter("checkFinish"));
+        
+        //Creamos el objeto de tarea (modelo)
+        Tarea tarea = new Tarea(idTarea, nombre, descripcion, fechaInicio, fechaFin, finalizado,   idProyecto, idEmpleado);
+        
+        //Modificar el objeto en la base de datos
+        String registrosModificados = new TareasDAO().actualizar(tarea);
         System.out.println("registrosModificados = " + registrosModificados);
 
         //Redirigimos hacia accion por default

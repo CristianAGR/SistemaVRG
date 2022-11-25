@@ -230,8 +230,8 @@
                             <c:if  test="${tarea.finalizado == false}" >
                                 <p class="text-table">No Finalizado</p>
                             </c:if>
-                            <a tyle="text-decoration: none" 
-                               class="btn-editar-tarea" 
+                            <a style="text-decoration: none" 
+                               class="btn-editar-tarea"
                                href="${pageContext.request.contextPath}/ServletControlador?accion=editarTarea&idTarea=${tarea.idTarea}">
                                 Editar
                             </a>
