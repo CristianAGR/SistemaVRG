@@ -288,7 +288,9 @@
                         <!-- ========= SHOW PROJECTS ============= -->
                         <c:forEach var="proyecto" items="${proyectos}" varStatus="status" > 
                             <% ClienteDAO cliente = new ClienteDAO(); %>
-                        <a href="${pageContext.request.contextPath}/ServletControlador?accion=editarProyecto&idProyecto=${proyecto.idProyecto}"
+                        <a
+                            style="text-decoration: none"
+                            href="${pageContext.request.contextPath}/ServletControlador?accion=editarProyecto&idProyecto=${proyecto.idProyecto}"
                                            class="btn btn-secondary">
                            <div class="project">
                              <img width="50" src="assets/proectIcon.svg" alt="">
