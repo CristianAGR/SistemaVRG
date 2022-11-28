@@ -13,7 +13,10 @@ import Domain.Proyecto;
 import Domain.Tarea;
 import java.io.IOException;
 import static java.lang.Boolean.valueOf;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,8 +39,36 @@ public class ServletControlador extends HttpServlet {
             switch (accion) {
                 case "editarProyecto":
                     this.editarProyecto(request, response);
+                    break;
                 case "editarTarea":
                     this.editarProyecto(request, response);
+                    break;
+                case "eliminarProyecto":
+                    this.eliminarProyecto(request, response);
+                    break;
+                default:
+                    this.accionDefault(request, response);
+            }
+        } else {
+            this.accionDefault(request, response);
+        }
+    }
+    
+        @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String accion = request.getParameter("accion");
+        if (accion != null) {
+            switch (accion) {
+                case "insertarProyecto":
+                    this.insertarProyecto(request, response);
+                    break;
+                case "insertarTarea":
+                    this.insertarTarea(request, response);
+                    break;
+                case "modificarProyecto":
+                    this.modificarProyecto(request, response);
+                    break;
                 default:
                     this.accionDefault(request, response);
             }
@@ -70,38 +101,81 @@ public class ServletControlador extends HttpServlet {
         response.sendRedirect("menu.jsp");
     }
         
-        private void editarProyecto(HttpServletRequest request, HttpServletResponse response)
+        private void insertarProyecto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //recuperamos el idProyecto
-        int idProyecto = Integer.parseInt(request.getParameter("idProyecto"));
-        Proyecto proyecto = new ProyectoDAO().seleccionarProyecto(idProyecto);
-        List<Empleado> empleados = new EmpleadoDAO().seleccionarEmpleados();
-        List<Tarea> tareas = new TareasDAO().seleccionarTareasIdProyecto(idProyecto);
-        request.setAttribute("proyecto", proyecto);
-        request.setAttribute("tareas", tareas);
-        request.setAttribute("empleados", empleados);
-        String jspEditar = "/view/paginas/proyecto/editarProyecto.jsp";
-        request.getRequestDispatcher(jspEditar).forward(request, response);
-    }
+            // recuperamos los valores del fomulario insertarProyecto
+            
+            //Valores formulario
+            String nombre = request.getParameter("nombre");
+            String tipo = request.getParameter("tipo");
+            String fechaInicio = request.getParameter("fechaInicio");
+            String fechaFin = request.getParameter("fechaFin");
+            String idCliente = request.getParameter("cliente"); 
+            int finalizado = 0;
+            int idClienteInt = Integer.parseInt(idCliente);
+            
+            //Creamos objeto tipo Proyecto (modelo)
+            Proyecto proyecto = new Proyecto(nombre, tipo, fechaInicio, fechaFin, idClienteInt, finalizado);
+            
+            // Insertar objeto en la base de datos
+            String registrosModificados = new ProyectoDAO().insertar(proyecto);
+            System.out.println("registrosModificados = " + registrosModificados);
+
+            //Redirigimos hacia accion por default
+            this.accionDefault(request, response);
+            
+        }
         
-        @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String accion = request.getParameter("accion");
-        if (accion != null) {
-            switch (accion) {
-                case "insertarTarea":
-                    this.insertarTarea(request, response);
-                    break;
-                default:
-                    this.accionDefault(request, response);
-            }
-        } else {
+        private void modificarProyecto(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+            int finalizadoOBJ = 0;
+            //Recuperamos los valores del formulario
+            //Valores formulario
+            int idProyecto = Integer.parseInt(request.getParameter("idProyecto"));
+            String nombre = request.getParameter("nombre");
+            String tipo = request.getParameter("tipo");
+            String fechaInicio = request.getParameter("fechaInicio");
+            String fechaFin = request.getParameter("fechaFin");
+            
+            String finalizado = request.getParameter("finalizado"); //Devuelve null si no esta checked
+            if(finalizado != null){ finalizadoOBJ = 1; }
+            
+            String idCliente = request.getParameter("cliente"); 
+            int idClienteInt = Integer.parseInt(idCliente);
+            
+             //Creamos objeto tipo Proyecto (modelo)
+            Proyecto proyecto = new Proyecto(idProyecto, nombre, tipo, fechaInicio, fechaFin, idClienteInt, finalizadoOBJ);
+            
+            // Insertar objeto en la base de datos
+            String registrosModificados = new ProyectoDAO().actualizar(proyecto);
+            System.out.println("registrosModificados = " + registrosModificados);
+            
+            //Redirigimos hacia accion por default
             this.accionDefault(request, response);
         }
-    }
-    
-    private void insertarTarea(HttpServletRequest request, HttpServletResponse response)
+        
+        private void eliminarProyecto(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException{
+            
+                 try {
+                     //recuperamos los valores del formulario editarCliente
+                     int idProyecto = Integer.parseInt(request.getParameter("idProyecto"));
+                     
+                     //Creamos el objeto de cliente (modelo)
+                     Proyecto proyecto = new Proyecto(idProyecto);
+                     
+                     //Eliminamos el objeto en la base de datos
+                     String registrosModificados = new ProyectoDAO().eliminar(proyecto);
+                     System.out.println("registrosModificados = " + registrosModificados);
+                     
+                     //Redirigimos hacia accion por default
+                     this.accionDefault(request, response);
+                 } catch (SQLException ex) {
+                     Logger.getLogger(ServletControlador.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+        }
+        
+        private void insertarTarea(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos los valores del formulario agregarCliente
         String nombre = request.getParameter("nombre");
@@ -122,6 +196,26 @@ public class ServletControlador extends HttpServlet {
         //Redirigimos hacia accion por default
         this.accionDefault(request, response);
     }
+        
+        private void editarProyecto(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //recuperamos el idProyecto
+        int idProyecto = Integer.parseInt(request.getParameter("idProyecto"));
+        Proyecto proyecto = new ProyectoDAO().seleccionarProyecto(idProyecto);
+        List<Empleado> empleados = new EmpleadoDAO().seleccionarEmpleados();
+        List<Tarea> tareas = new TareasDAO().seleccionarTareasIdProyecto(idProyecto);
+        List<Cliente> clientes = new ClienteDAO().seleccionarClientes();
+        request.setAttribute("proyecto", proyecto);
+        request.setAttribute("tareas", tareas);
+        request.setAttribute("empleados", empleados);
+        request.setAttribute("clientes", clientes);
+        String jspEditar = "/view/paginas/proyecto/editarProyecto.jsp";
+        request.getRequestDispatcher(jspEditar).forward(request, response);
+    }
+        
+    
+    
+    
 
 
 

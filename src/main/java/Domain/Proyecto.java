@@ -8,7 +8,7 @@ public class Proyecto {
     private String tipoProyecto;
     private String fechaInicio;
     private String fechaFin;
-    private boolean finalizado;
+    private int finalizado;
     private int idCliente;
     //Constuctores
 
@@ -18,7 +18,7 @@ public class Proyecto {
     public Proyecto(int idProyecto) {
         this.idProyecto = idProyecto;
     }
-     public Proyecto(String nombre, String tipoProyecto, String fechaInicio, String fechaFin, int idCliente, boolean finalizado) {
+     public Proyecto(String nombre, String tipoProyecto, String fechaInicio, String fechaFin, int idCliente, int finalizado) {
         this.nombre = nombre;
         this.tipoProyecto = tipoProyecto;
         this.fechaInicio = fechaInicio;
@@ -27,7 +27,7 @@ public class Proyecto {
         this.finalizado = finalizado;
     }
 
-    public Proyecto(int idProyecto,String nombre, String tipoProyecto, String fechaInicio, String fechaFin, boolean finalizado, int idCliente) {
+    public Proyecto(int idProyecto,String nombre, String tipoProyecto, String fechaInicio, String fechaFin, int finalizado, int idCliente) {
         this.idProyecto = idProyecto;
         this.nombre = nombre;
         this.tipoProyecto = tipoProyecto;
@@ -86,11 +86,11 @@ public class Proyecto {
         this.idCliente = idCliente;
     }
    
-    public boolean isFinalizado() {
+    public int getFinalizado() {
         return finalizado;
     }
 
-    public void setFinalizado(boolean finalizado) {
+    public void setFinalizado(int finalizado) {
         this.finalizado = finalizado;
     }
     

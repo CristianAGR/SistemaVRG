@@ -47,7 +47,12 @@
 
             <div class="content-modal-edit" style="margin-top: -1rem;">
                 
-                <form class="form-create" method="post">
+                <!-- =========== INSERT PROYECT ============== -->
+                <form
+                    action="${pageContext.request.contextPath}/ServletControlador?accion=insertarProyecto"
+                    method="POST"
+                    class="form-create" >
+                    
                     <div style="display: flex; align-items: center; justify-content: space-between; width: 850px;">
                         <h4 style="color: white;">Formulario de proyectos</h4>
                     </div>
@@ -57,39 +62,38 @@
 
                             <div style="display: block">
                                 <p class="label-modal">Nombre del proyecto</p>
-                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input" type="text" placeholder="Nombre de la tarea">
+                                <input name="nombre" style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input" type="text" placeholder="Nombre de la tarea">
                             </div>
     
                             <div style="display: block;">
                                 <p class="label-modal">Tipo de poyecto</p>
-                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input" type="text" placeholder="Tipo de proyecto">
+                                <input name="tipo" style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input" type="text" placeholder="Tipo de proyecto">
                             </div>
                             
                             <div style="display: block;">
                                 <p class="label-modal">Fecha de inicio</p>
-                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" >
+                                <input name="fechaInicio" style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" >
                             </div>
     
                             <div style="display: block;">
                                 <p class="label-modal">Fecha de finalización</p>
-                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" >
+                                <input name="fechaFin" style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" >
                             </div>
                             <div style="display: block;">
                                 <p class="label-modal">Cliente</p>
-                                <select  style="width: 100%;margin-bottom: 1.5rem;"class="modal-input" name="empleados" required>
-                                    <option class="option-modal" value="ricardo">Ricardo</option>
-                                    <option class="option-modal" value="ricardo">Ricardo</option>
-                                    <option class="option-modal" value="ricardo">Ricardo</option>
-                                    
+                                <select name="cliente" style="width: 100%;margin-bottom: 1.5rem;"class="modal-input" required>
+                                    <c:forEach var="cliente" items="${clientes}" varStatus="status">
+                                        <option class="option-modal" value="${cliente.idCliente}">${cliente.nombre}</option>
+                                    </c:forEach>
                                 </select>
                             </div>  
                         </div>
                         
                     </div>
 
-                    <div style="margin-top: -0.5rem;" class="btn-form">
+                    <button type="submit" style="margin-top: -0.5rem;" class="btn-form">
                         Guardar proyecto
-                    </div>
+                    </button>
 
                     
                 </form>

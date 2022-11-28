@@ -44,7 +44,7 @@ public class ProyectoDAO {
             String tipoProyecto = rs.getString("tipoProyecto");
             String fechaInicio = rs.getString("fechaInicio");
             String fechaFin = rs.getString("fechaFin");
-            boolean finalizado = rs.getBoolean("finalizado");
+            int finalizado = rs.getInt("finalizado");
             int idCliente = rs.getInt("idCliente");
             
             proyecto = new Proyecto(idProyecto,nombre,tipoProyecto,fechaInicio,fechaFin,finalizado,idCliente);
@@ -75,8 +75,8 @@ public class ProyectoDAO {
        try { 
            ConexionBD Con = new ConexionBD();
            if (proyecto.getNombre() != null) {
-                            Con.ConectarBD();
-               Con.sentencia.execute(SQL_INSERT +"('"+proyecto.getNombre()+"','"+proyecto.getTipoProyecto()+"','"+proyecto.getFechaInicio()+"','"+proyecto.getFechaFin()+"','"+proyecto.isFinalizado()+"','"+proyecto.getIdCliente()+"')");
+               Con.ConectarBD();
+               Con.sentencia.execute(SQL_INSERT +"('"+proyecto.getNombre()+"','"+proyecto.getTipoProyecto()+"','"+proyecto.getFechaInicio()+"','"+proyecto.getFechaFin()+"','"+proyecto.getFinalizado()+"','"+proyecto.getIdCliente()+"')");
               sms = "Los Datos fueron Insertados con exito";
               Con.DesconectarBD();
            }
@@ -129,7 +129,7 @@ public class ProyectoDAO {
             String tipoProyecto = rs.getString("tipoProyecto");
             String fechaInicio = rs.getString("fechaInicio");
             String fechaFin = rs.getString("fechaFin");
-            boolean finalizado = rs.getBoolean("finalizado");
+            int finalizado = rs.getInt("finalizado");
             int idCliente = rs.getInt("idCliente");
             
             proyecto = new Proyecto(idProyecto,nombre,tipoProyecto,fechaInicio,fechaFin,finalizado,idCliente);
@@ -154,7 +154,7 @@ public class ProyectoDAO {
           
      public String actualizar (Proyecto proyecto){
         String sms ="";
-       String SQL_UPDATE ="UPDATE proyectos SET nombre='"+proyecto.getNombre()+"',tipoProyecto='"+proyecto.getTipoProyecto()+"',fechaInicio='"+proyecto.getFechaInicio()+"',fechaFin='"+proyecto.getFechaFin()+"',finalizado='"+proyecto.isFinalizado()+"',idCliente='"+proyecto.getIdCliente()+"'  WHERE idProyecto= "+proyecto.getIdProyecto();
+       String SQL_UPDATE ="UPDATE proyectos SET nombre='"+proyecto.getNombre()+"',tipoProyecto='"+proyecto.getTipoProyecto()+"',fechaInicio='"+proyecto.getFechaInicio()+"',fechaFin='"+proyecto.getFechaFin()+"',finalizado='"+proyecto.getFinalizado()+"',idCliente='"+proyecto.getIdCliente()+"' WHERE idProyecto = "+proyecto.getIdProyecto();
      try { 
             ConexionBD Con=new ConexionBD();
             Con.ConectarBD();

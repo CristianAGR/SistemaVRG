@@ -20,7 +20,7 @@ public class ConexionBD {
     public ResultSet resultado;
     private static final String url_bd="jdbc:mysql://localhost:3306/sistemaVRG?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private static final String user_bd="root";
-    private static final String pass_bd="123456";
+    private static final String pass_bd="hola12345";
     
     private static BasicDataSource dataSource;
 

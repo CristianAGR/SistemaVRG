@@ -8,10 +8,40 @@
     <link rel="stylesheet" href="style.css">
     <title>Editar Proyecto</title>
 </head>
-<body>
 
-    <div style="overflow-y: scroll;height: 100vh">
-            <!-- ======= MODAL EDITAR TAREA =========== -->
+<style>
+    
+
+    .checkProject{
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        top:0;
+        left: 0;
+        opacity: 0;
+    }
+    
+    .container-check{
+        position: relative;
+        overflow:hidden;
+    }
+    
+    .btn-guardar-proyecto{
+        color: #8b8c8d;
+        transition: 0.3s;
+        background-color: transparent;
+        font-size: 1rem;
+    }
+    
+    .btn-guardar-proyecto:hover{
+        background-color: white;
+        color: black;
+    }
+    
+</style>
+
+<body>
+    <!-- Modal para agregar una tarea -->    
     <section
     style="
     position: absolute; 
@@ -99,35 +129,43 @@
                     <button style="margin-top: -0.5rem;" class="btn-form" type="submit">Guardar proyecto</button>
                     
                 </form>
-
                
             </div>
 
         </article>
 
     </section>
-    
-    <section  class="modal-bg-edit-display-editarProyecto">
-
-        <div class="center-form">
-            <div class="head-modal" style="display: flex; align-items: center;justify-content: space-between;">
+                    
+                    
+    <div style="overflow-y: scroll;height: 100vh">
+        
+         <section  class="modal-bg-edit-display-editarProyecto">
+                
+            <div class="center-form">
+                <div class="content-project">
+                    
+                    <form action="${pageContext.request.contextPath}/ServletControlador?accion=modificarProyecto&idProyecto=${proyecto.idProyecto}" method="POST" >
+                        <div class="head-modal" style="display: flex; align-items: center;justify-content: space-between;">
                 <div>
                     <h2>Editar proyecto</h2>
                     <p style="font-weight: 300; font-size: 12px;">Configuración de estado del proyecto</p>    
                 </div>  
                 <div>
-                    <a
-                    style="text-decoration: none; 
-                    
-                    font-weight: 300; 
-                    border: 1px solid rgba(255, 255, 255, 0.473);
-                    padding: 10px 3rem;
-                    border-radius: 5px;
-                    margin-right: 2rem;
-                    "
-                    class="btn-guardar" href="#">Guardar</a>
+                    <button
+                         style=
+                            "   text-decoration: none; 
+                                cursor: pointer;
+                                font-weight: 300; 
+                                border: 1px solid rgba(255, 255, 255, 0.473);
+                                padding: 10px 3rem;
+                                border-radius: 5px;
+                                margin-right: 2rem;
+                            "
+                        class="btn-guardar-proyecto" type="submit">
+                        Guardar
+                    </button>
                     <a 
-                    style="text-decoration: none; 
+                        style="text-decoration: none;
                         
                         font-weight: 300;
                         border: 1px solid rgba(255, 255, 255, 0.558);
@@ -135,21 +173,29 @@
                         border-radius: 5px;
                         margin-right: 2rem;
                         "
-                    class="btn-eliminar" href="#">Eliminar</a>    
+                        class="btn-guardar"
+                        href="${pageContext.request.contextPath}/ServletControlador?accion=eliminarProyecto&idProyecto=${proyecto.idProyecto}">
+                        Eliminar
+                    </a>
                 </div>  
             </div>
 
             <div style="padding: 0 4rem;">
                 
-                <form style="margin-bottom: 2rem;" class="form-create" method="post">
-                    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                        <h4 style="color: white;">Formulario de proyectos</h4>
-                        <ul>
+                
+                    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 2rem; margin-bottom: 1rem;">
+                        <h4 style="color: white;">Formulario de proyectos  </h4>
+                        <ul class="container-check">
                             <li>
-                                <input style="opacity: 0;" type="checkbox" id="checkFinish" name="checkFinish" value="checkFinish">
+                                <c:if test="${proyecto.finalizado == 0}">
+                                    <input class="checkProject" type="checkbox" id="checkFinish" name="finalizado" value="1">
+                                </c:if>
+                                <c:if test="${proyecto.finalizado == 1}">
+                                    <input checked class="checkProject" type="checkbox" id="checkFinish" name="finalizado" value="1">
+                                </c:if>
                                 <label for="checkFinish">
                                     <div style="display: flex; align-items: center; column-gap: 0.5rem;">
-                                        <img class="mark-form" src="assets/checkmark-outline.svg" width="20">
+                                        <!-- <img class="mark-form" src="assets/checkmark-outline.svg" width="20"> -->
                                         Finalizar proyecto
                                     </div>
                                 </label>
@@ -163,37 +209,45 @@
 
                             <div style="display: block">
                                 <p class="label-modal">Nombre del proyecto</p>
-                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input" type="text" placeholder="Nombre del proyecto" required value="${proyecto.nombre}">
+                                <input name="nombre" style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input" type="text" placeholder="Nombre del proyecto" required value="${proyecto.nombre}">
                             </div>
     
                             <div style="display: block;">
                                 <p class="label-modal">Tipo de poyecto</p>
-                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input" type="text" placeholder="Tipo de proyceto" value="${proyecto.tipoProyecto}">
+                                <input name="tipo" style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input" type="text" placeholder="Tipo de proyceto" value="${proyecto.tipoProyecto}">
                             </div>
                             
                             <div style="display: block;">
                                 <p class="label-modal">Fecha de inicio</p>
-                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" required value="${proyecto.fechaInicio}">
+                                <input name="fechaInicio" style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" required value="${proyecto.fechaInicio}">
                             </div>
     
                             <div style="display: block;">
                                 <p class="label-modal">Fecha de finalización</p>
-                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" >
+                                <input name="fechaFin" style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" value="${proyecto.fechaFin}" >
                             </div>
                             <div style="display: block;">
                                 <p class="label-modal">Cliente</p>
-                                <select  style="width: 100%;margin-bottom: 1.5rem;"class="modal-input" name="empleados" required>
-                                    <option class="option-modal" value="ricardo">Ricardo</option>
-                                    <option class="option-modal" value="ricardo">Ricardo</option>
-                                    <option class="option-modal" value="ricardo">Ricardo</option>
-                                    
+                                <select  style="width: 100%;margin-bottom: 1.5rem;"class="modal-input" name="cliente" required>
+                                        <c:forEach var="cliente" items="${clientes}" varStatus="status">
+                                        <c:if test="${cliente.idCliente == proyecto.idCliente}">
+                                            <option class="option-modal" value="${cliente.idCliente}">${cliente.nombre}</option>
+                                        </c:if>
+                                    </c:forEach>
+                                    <c:forEach var="cliente" items="${clientes}" varStatus="status">
+                                        <c:if test="${cliente.idCliente != proyecto.idCliente}">
+                                            <option class="option-modal" value="${cliente.idCliente}">${cliente.nombre}</option>
+                                        </c:if>
+                                    </c:forEach>
                                 </select>
                             </div>  
                         </div>
                     </div>  
-                </form>
-
-                <div style="width: 100%; padding-bottom: 5rem;">
+                    </div>
+                    </form>
+                
+                <!-- ============= Comienza tabla de tareas ================ -->
+                <div style="width: 100%; padding-bottom: 5rem; padding:2rem 4rem">
                     <div class="table">
                         <div style="display: flex; justify-content: space-between;">
                             <h3 style="color: white; font-weight: 400;">Tareas</h3>
@@ -240,32 +294,35 @@
 
                
             </div>
-        </div>
+            </div>
 
         
 
-    </section>
+        </section>
 
 
+    </div>
+                            
+                            
 
     <script>
+        
 
         //Agregar proyecto
-        let agregarTareaModal = document.getElementById('agregar-tarea-modal')
-        let btnAgregarTarea = document.getElementById('btn-agregar-tarea')
-        let btnCerrarModal = document.getElementById('cerrar-modal')
+        let agregarTareaModal = document.getElementById('agregar-tarea-modal');
+        let btnAgregarTarea = document.getElementById('btn-agregar-tarea');
+        let btnCerrarModal = document.getElementById('cerrar-modal');
         
         btnAgregarTarea.addEventListener('click', () => {
-            agregarTareaModal.style.display = "flex"
-        })
+            agregarTareaModal.style.display = "flex";
+        });
 
         btnCerrarModal.addEventListener('click', () => {
-            agregarTareaModal.style.display = "none"
-        })
+            agregarTareaModal.style.display = "none";
+        });
 
 
     </script>
-    </div>
-
+    
 </body>
 </html>

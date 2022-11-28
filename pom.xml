@@ -5,7 +5,7 @@
     <artifactId>AbstractosFinal</artifactId>
     <version>1.1</version>
     <packaging>war</packaging>
-    <name>AbstractosFinal-1.0</name>
+    <name>AbstractosFinal-Github</name>
     
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
