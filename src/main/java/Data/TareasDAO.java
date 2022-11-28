@@ -197,7 +197,11 @@ public class TareasDAO {
           
      public String actualizar (Tarea tarea){
         String sms ="";
-       String SQL_UPDATE ="UPDATE tareas SET nombre='"+tarea.getNombre()+"',descripcion='"+tarea.getDescripcion()+"',fechaInicio='"+tarea.getFechaInicio()+"',fechaFin='"+tarea.getFechaFin()+"',finalizado='"+tarea.isFinalizado()+"',idProyecto='"+tarea.getIdProyecto()+"',idEmpleado='"+tarea.getIdEmpleado()+"'  WHERE idTarea= "+tarea.getIdTarea();
+        int tareaF;
+                            if(tarea.isFinalizado() == true) {
+                                tareaF = 1;
+                            } else { tareaF = 0;}
+       String SQL_UPDATE ="UPDATE tareas SET nombre='"+tarea.getNombre()+"',descripcion='"+tarea.getDescripcion()+"',fechaInicio='"+tarea.getFechaInicio()+"',fechaFin='"+tarea.getFechaFin()+"',finalizado='"+tareaF+"',idProyecto='"+tarea.getIdProyecto()+"',idEmpleado='"+tarea.getIdEmpleado()+"'  WHERE idTarea= "+tarea.getIdTarea();
      try { 
             ConexionBD Con=new ConexionBD();
             Con.ConectarBD();

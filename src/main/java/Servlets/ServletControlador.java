@@ -66,9 +66,24 @@ public class ServletControlador extends HttpServlet {
                 case "insertarTarea":
                     this.insertarTarea(request, response);
                     break;
+                case "updateTarea":
+                    this.updateTarea(request, response);
+                    break;
                 case "modificarProyecto":
                     this.modificarProyecto(request, response);
                     break;
+                case "editarTarea":
+                    this.editarTarea(request, response);
+                    break;
+                case "eliminarTarea":
+                {
+                    try {
+                        this.eliminarTarea(request, response);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ServletControlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
                 default:
                     this.accionDefault(request, response);
             }
@@ -100,7 +115,7 @@ public class ServletControlador extends HttpServlet {
         
         response.sendRedirect("menu.jsp");
     }
-        
+
         private void insertarProyecto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             // recuperamos los valores del fomulario insertarProyecto
@@ -153,6 +168,58 @@ public class ServletControlador extends HttpServlet {
             //Redirigimos hacia accion por default
             this.accionDefault(request, response);
         }
+            
+//    private void editarProyecto(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        //recuperamos el idProyecto
+//        int idProyecto = Integer.parseInt(request.getParameter("idProyecto"));
+//        Proyecto proyecto = new ProyectoDAO().seleccionarProyecto(idProyecto);
+//        // hacemos una lista de los empleados
+//        List<Empleado> empleados = new EmpleadoDAO().seleccionarEmpleados();
+//        // hacemos una lista de las tareas con el mismo id de Proyecto
+//        List<Tarea> tareas = new TareasDAO().seleccionarTareasIdProyecto(idProyecto);
+//        // enviamos los atributos
+//        request.setAttribute("proyecto", proyecto);
+//        request.setAttribute("tareas", tareas);
+//        request.setAttribute("empleados", empleados);
+//        
+//        // ingresamos la dirección del jsp al que se quiere ir
+//        String jspEditar = "/view/paginas/proyecto/editarProyecto.jsp";
+//        request.getRequestDispatcher(jspEditar).forward(request, response);
+//    }
+    
+    private void editarTarea(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //recuperamos el idTarea
+        int idTarea = Integer.parseInt(request.getParameter("idTarea"));
+        Tarea tarea = new TareasDAO().seleccionarTarea(idTarea);
+        // hacemos una lista de los empleados
+        List<Empleado> empleados = new EmpleadoDAO().seleccionarEmpleados();
+        // enviamos el atributo
+        request.setAttribute("tarea", tarea);
+        request.setAttribute("empleados", empleados);
+        
+        // ingresamos la dirección del jsp al que se quiere ir
+        String jspEditar = "/view/paginas/tarea/editarTarea.jsp";
+        request.getRequestDispatcher(jspEditar).forward(request, response);
+    }
+    
+    private void eliminarTarea(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        //recuperamos los valores del formulario editarTarea
+        int idTarea = Integer.parseInt(request.getParameter("idTarea"));
+     
+        //Creamos el objeto de tarea (modelo)
+        Tarea tarea = new Tarea(idTarea);
+
+        //Eliminamos el  objeto en la base de datos
+        String registrosModificados = new TareasDAO().eliminar(tarea);
+        System.out.println("registrosModificados = " + registrosModificados);
+
+        //Redirigimos hacia accion por default
+        this.accionDefault(request, response);
+    }
+        
         
         private void eliminarProyecto(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException{
@@ -177,7 +244,7 @@ public class ServletControlador extends HttpServlet {
         
         private void insertarTarea(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //recuperamos los valores del formulario agregarCliente
+        //recuperamos los valores del formulario agregarTarea
         String nombre = request.getParameter("nombre");
         String descripcion = request.getParameter("descripcion");
         String fechaInicio = request.getParameter("fechaInicio");
@@ -212,10 +279,31 @@ public class ServletControlador extends HttpServlet {
         String jspEditar = "/view/paginas/proyecto/editarProyecto.jsp";
         request.getRequestDispatcher(jspEditar).forward(request, response);
     }
+
+        private void updateTarea(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            
+            //recuperamos los valores del formulario editarTarea
+        int idTarea = Integer.parseInt(request.getParameter("idTarea"));
+        String nombre = request.getParameter("nombre");
+        String descripcion = request.getParameter("descripcion");
+        String fechaInicio = request.getParameter("fechaInicio");
+        String fechaFin = request.getParameter("fechaFin");
+        int idProyecto = Integer.parseInt(request.getParameter("idProyecto"));
+        int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
+        boolean finalizado = valueOf(request.getParameter("checkFinish"));
         
-    
-    
-    
+        //Creamos el objeto de tarea (modelo)
+        Tarea tarea = new Tarea(idTarea, nombre, descripcion, fechaInicio, fechaFin, finalizado,   idProyecto, idEmpleado);
+        
+        //Modificar el objeto en la base de datos
+        String registrosModificados = new TareasDAO().actualizar(tarea);
+        System.out.println("registrosModificados = " + registrosModificados);
+
+        //Redirigimos hacia accion por default
+        this.accionDefault(request, response);
+    }
+
 
 
 

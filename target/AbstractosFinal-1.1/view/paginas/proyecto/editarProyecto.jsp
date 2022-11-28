@@ -219,12 +219,20 @@
                             
                             <div style="display: block;">
                                 <p class="label-modal">Fecha de inicio</p>
+<<<<<<< HEAD
                                 <input name="fechaInicio" style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" required value="${proyecto.fechaInicio}">
+=======
+                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date"  value="${proyecto.fechaInicio}">
+>>>>>>> 42cbea22bd7ef820d34578c183b0d210391fd1ff
                             </div>
     
                             <div style="display: block;">
                                 <p class="label-modal">Fecha de finalización</p>
+<<<<<<< HEAD
                                 <input name="fechaFin" style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" value="${proyecto.fechaFin}" >
+=======
+                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" value="${proyecto.fechaFin}">
+>>>>>>> 42cbea22bd7ef820d34578c183b0d210391fd1ff
                             </div>
                             <div style="display: block;">
                                 <p class="label-modal">Cliente</p>
@@ -284,7 +292,11 @@
                             <c:if  test="${tarea.finalizado == false}" >
                                 <p class="text-table">No Finalizado</p>
                             </c:if>
-                            <a class="btn-editar-tarea" href="#">Editar</a>
+                            <a style="text-decoration: none" 
+                               class="btn-editar-tarea"
+                               href="${pageContext.request.contextPath}/ServletControlador?accion=editarTarea&idTarea=${tarea.idTarea}">
+                                Editar
+                            </a>
                         </div>
                         </c:forEach>
                        
