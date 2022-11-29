@@ -162,7 +162,7 @@ public class ServletControlador extends HttpServlet {
             int idClienteInt = Integer.parseInt(idCliente);
             
              //Creamos objeto tipo Proyecto (modelo)
-            Proyecto proyecto = new Proyecto(idProyecto, nombre, tipo, fechaInicio, fechaFin, idClienteInt, finalizadoOBJ);
+            Proyecto proyecto = new Proyecto(idProyecto, nombre, tipo, fechaInicio, fechaFin, finalizadoOBJ,idClienteInt );
             
             // Insertar objeto en la base de datos
             String registrosModificados = new ProyectoDAO().actualizar(proyecto);
