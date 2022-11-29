@@ -1,0 +1,704 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;1,700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    background-color: #1e1f21;
+    overflow: hidden;
+}
+
+.intro{
+    background-color: #252628;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.center-rectangle{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.logo{
+    position: absolute;
+    bottom: 4rem;
+}
+
+@keyframes hiddeIntro { 
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+
+/* =========== ASIDE =========== */
+aside{
+    width: 240px;
+    background-color: #2e2e30;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.aside-logo{
+    margin-top: 1rem;
+    width: 120px;
+    margin: 1.5rem 0 1rem 1rem;
+}
+
+.item-nav{
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    width: 100%;
+    padding: 8px 1rem;
+    cursor: pointer;
+}
+
+.item-nav:hover{
+    background-color: #505051;
+}
+
+.item-icon{
+    filter: invert(52%) sepia(0%) saturate(1080%) hue-rotate(87deg) brightness(94%) contrast(84%);
+    width: 1.2rem;
+}
+
+.item-text{
+    color: white;
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+
+
+/* Teams */
+
+.team-aside{
+    margin-top: 1rem;
+    border-top: 1px solid #505051;
+    border-bottom: 1px solid #505051;
+    height: 310px;
+    padding: 1rem;
+    overflow-y: scroll;
+}
+
+/* Change the background */
+.team-aside::-webkit-scrollbar{
+    background-color: transparent;
+    width: 10px;
+}
+
+/* Change the thumb */
+.team-aside::-webkit-scrollbar-thumb{
+    background: #A2A0A2;
+    border-radius: 10px;
+}
+
+
+.team-icons{
+    display: flex;
+    column-gap: 5px;
+    margin-top: 10px;
+}
+
+.profile-team{
+    width: 28px;
+}
+
+.project-name{
+    display: flex;
+    column-gap: .4rem;
+    align-items: center;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
+.square{
+    width: 5px;
+    height: 5px;
+    background-color: #f26fb2;
+}
+
+.square-2{
+    background-color: #64c1dd;
+}
+
+.square-3{
+    background-color: #bbeb63;
+}
+
+.square-4{
+    background-color: #f3f032;
+}
+
+.square-5{
+    background-color: #c73897;
+}
+
+.add-team{
+    display: flex;
+    column-gap: 0.5rem;
+}
+
+/* Options Aside */
+.option-aside{
+    display: flex;
+    column-gap: .6rem;
+    padding: 1rem;
+}
+
+/* ======== MAIN CONTENT ======== */
+main{
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.content{
+    background-color: #1e1f21;
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+
+}
+
+.content::-webkit-scrollbar{
+    background-color: transparent;
+    width: 10px;
+}
+
+/* Change the thumb */
+.content::-webkit-scrollbar-thumb{
+    background: #A2A0A2;
+    border-radius: 10px;
+}
+
+/* HEADER --- NAV */
+.nav{
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+}
+
+.content-profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.search{
+    border: 1px solid #a2a0a2a1;
+    outline: none;
+    padding: 8px 1rem;
+    background-color: transparent;
+    border-radius: 1rem;
+    background: url(assets/search.svg) no-repeat scroll 8px 6px;
+    padding-left:40px;
+    background-size: 20px;
+    width: 170px;
+}
+
+.btn-nav{
+    background-color: #f1bd6c;
+    padding: 10px 1rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+/* HEADER INFO */
+
+.main-info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.counter{
+    background-color: #252628;
+    display: flex;
+    width: 550px;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.7rem 2rem;
+    border-radius: 3rem;
+}
+
+.img-counter{
+    filter: invert(69%) sepia(0%) saturate(185%) hue-rotate(99deg) brightness(96%) contrast(83%);
+}
+
+.text-counter{
+    color: #a09ea0;
+    font-weight: 300;
+    font-size: 0.8rem;
+}
+
+.count-counter{
+    color: #a09ea0;
+    font-size: 1.4rem;
+}
+
+.counter-item{
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.vertical-line{
+    height: 20px;
+    width: 1px;
+    background-color: #a09ea0;
+}
+
+/* ========== SECTIONS =========== */
+
+.first-section, .second-section{
+    display: flex;
+    margin: 2rem 2rem;
+    column-gap: 1rem;
+}
+
+.rectangle-section{
+    background-color: #2a2b2d;
+    width: 50%;
+    height: 430px;
+    border: 1px solid rgba(255, 255, 255, 0.192);
+    border-radius: 1rem;
+    transition: 0.3s;
+}
+
+.rectangle-section:hover{
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.full-section{
+    background-color: #2a2b2d;
+    width: 100%;
+    height: 380px;
+    border: 1px solid rgba(255, 255, 255, 0.192);
+    border-radius: 1rem;
+    transition: 0.3s;
+}
+
+.full-section:hover{
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.title-rectangle{
+    padding: 1.5rem;
+    display: flex;
+    column-gap: 1rem;
+    border-bottom: 1px solid #424244;
+    align-items: center;
+}
+
+.horizontal-container{
+    margin: 2rem;   
+    height: 250px;
+    display: flex;
+    column-gap: 1rem;
+    align-items: flex-start;
+    overflow-x: scroll;
+}
+
+.horizontal-container::-webkit-scrollbar{
+    background-color: transparent;
+    width: 5px;
+    height: 8px;
+}
+
+/* Change the thumb */
+.horizontal-container::-webkit-scrollbar-thumb{
+    background: #A2A0A2;
+    border-radius: 10px;
+}
+
+.cliente-card{
+    border: 1px solid #424244b9;
+    width: 180px;
+    height: 230px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.circle-name{
+    background-color: #4ecbc5;
+    padding: 1.8rem;
+    border-radius: 4rem;
+    font-size: 1.5rem;
+}
+
+.btn-profile{
+    position: absolute;
+    bottom: 2rem;
+    color: white; 
+    font-weight: 300; 
+    font-size: 0.7rem; 
+    padding: 5px 1rem; 
+    border: 1px solid #ffff; 
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-profile:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+/* =========  PROYECTOS =========== */
+
+.projects-container{
+    margin: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1rem;
+    height: 280px;
+    overflow-y: scroll;
+    align-content: flex-start;
+    row-gap: 1rem;
+}
+
+.projects-container::-webkit-scrollbar{
+    background-color: transparent;
+    width: 5px;
+    height: 8px;
+}
+
+/* Change the thumb */
+.projects-container::-webkit-scrollbar-thumb{
+    background: #A2A0A2;
+    border-radius: 10px;
+}
+
+.create-project{
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    color: #9f9ea0;
+    cursor: pointer;
+    width: 160px;
+    height: 80px;
+}
+
+.project{
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    color: white;
+    cursor: pointer;
+    width: 160px;
+    height: 80px;
+    margin: 0;
+    padding-left: 10px;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.project:hover{
+    background-color: #505051;
+}
+
+
+/* ================ MODAL =============== */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.modal-bg{
+    background-color: rgba(0, 0, 0, 0.496);
+    display: grid;
+    grid-template-columns: auto 980px auto;
+    height: 100vh;
+    width: 100%;
+    z-index: 100;
+    position: absolute;
+    transition: .7s;
+    display: none;
+}
+
+.modal-project{
+    width: 980px;
+    height: 650px;
+    background-color: #2E2E30;
+    border-radius: 10px;
+    z-index: 105;
+    margin: auto;
+}
+
+.modal-project-editar{
+    width: 980px;
+    background-color: #2E2E30;
+    border-radius: 10px;
+    z-index: 105;
+    margin: auto;
+    margin-top: 2rem;
+}
+
+.modal-project-auto{
+    border: 1px solid red;
+}
+
+.head-modal{
+    padding: 2rem;
+    padding-left: 4rem;
+    border-bottom: 1px solid #766E67;
+    color: white;
+    position: relative;
+}
+
+.content-modal{
+    padding: 1rem 4rem;
+    position: absolute;
+    height: 520px;
+    width: 980px;
+    overflow-y: scroll;
+}
+
+/* Change the background */
+.content-modal::-webkit-scrollbar{
+    background-color: transparent;
+    width: 10px;
+}
+
+/* Change the thumb */
+.content-modal::-webkit-scrollbar-thumb{
+    background: #A2A0A2;
+    border-radius: 10px;
+}
+
+.label-modal{
+    font-weight: 300;
+    font-size: 12px;
+    color: white;
+}
+
+.modal-input{
+    margin-top: 5px;
+    padding: 10px 1rem 10px 1rem;
+    background-color: transparent;
+    outline: none;
+    border: 1px solid #999999;
+    border-radius: 5px;
+    color: white;
+    font-weight: 300;
+    margin-right: 1rem;
+}
+
+.form-create{
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-create::placeholder{
+    font-weight: 300;
+}
+
+.option-modal{
+    background: #1e1e1e;
+    color: white;
+    font-weight: 300;
+}
+
+option:hover{
+    background: #505050;
+}
+
+.inpt-date::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.btn-form{
+    padding: 10px 2rem;
+    background-color: white;
+    color: #2E2E30;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: .5rem;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+-moz-appearance: textfield;
+}
+
+.row-table{
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr 2.5fr 1fr 2fr;
+    margin-top: 1rem;
+    border-bottom: 1px solid #999999;
+    padding-bottom: 0.7rem;
+    column-gap: 1rem;
+    padding-top: 0.7rem;
+}
+
+.text-table{
+    font-size: 12px; 
+    color: white; 
+    font-weight: 300;
+}
+
+main{
+    position: relative;
+}
+
+.modal-bg-edit{
+    background-color: rgba(0, 0, 0, 0.803);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    z-index: 120;
+    display: none;
+    position: absolute;
+}
+
+.content-modal-edit{
+    padding: 1rem 4rem;
+    position: absolute;
+    height: 320px;
+    width: 980px;
+}
+
+input[type="checkbox"] + label {
+    display: inline-block;
+    padding: 10px 3rem;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #999999;
+    color: #999999;
+    font-weight: 300;
+    background-color: transparent;
+    font-size: 12px;
+    transition: .2s;
+}
+
+input[type="checkbox"]:checked + label {
+    color: white;
+    background-color: #1d3733;
+    border: 1px solid #539277;
+    color: #539277;
+    font-weight: 400;
+}
+
+
+
+.mark-form {
+    /* Gray */
+    filter: invert(61%) sepia(47%) saturate(0%) hue-rotate(181deg) brightness(91%) contrast(88%);
+}
+
+
+li{
+    list-style-type: none;
+    list-style-position: outside;
+    padding: 10px;
+    float: left;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    clear: both;
+}
+
+.out-modal{
+    width: auto;
+    height: 100vh;
+}
+
+/* ============== AGREGAR PROYECTO MODAL =============== */
+body{
+    background-color: #1e1f21;
+    overflow: hidden;
+}
+
+.modal-bg-edit-display{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ============== Editar proyecto =============== */
+.btn-guardar, .btn-eliminar{
+    color: rgba(255, 255, 255, 0.499);
+    padding: 5px 3rem;
+
+}
+
+.btn-guardar:hover, .btn-eliminar:hover{
+    color: #1e1e1e;
+    background-color: white;
+    transition: .3s;
+    color: #1d3733;
+}
+
+.btn-editar-tarea, .btn-crear-tarea{
+    text-decoration: none;
+    color: white;
+    font-weight: 300;
+    margin-bottom: 5px;
+    font-size: .8rem;
+    padding: 8px 1rem;
+    border: 1px solid #8f8f8f;
+    border-radius: 3px;
+    text-align: center;
+    transition: .3s;
+}
+
+.btn-editar-tarea:hover, .btn-crear-tarea:hover{
+    background-color: white;
+    color: black;
+}
+
+#btn-agregar-proyecto:hover{
+    color: white;
+}
+
+/* Display modal */
+.no-display{
+    display: none;
+}
