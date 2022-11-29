@@ -41,11 +41,26 @@ public class ServletControlador extends HttpServlet {
                     this.editarProyecto(request, response);
                     break;
                 case "editarTarea":
-                    this.editarProyecto(request, response);
+                    this.editarTarea(request, response);
                     break;
                 case "eliminarProyecto":
-                    this.eliminarProyecto(request, response);
+                {
+                    try {
+                        this.eliminarProyecto(request, response);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ServletControlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
+                case "eliminarTarea":
+                {
+                    try {
+                        this.eliminarTarea(request, response);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ServletControlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
                 default:
                     this.accionDefault(request, response);
             }
@@ -72,18 +87,6 @@ public class ServletControlador extends HttpServlet {
                 case "modificarProyecto":
                     this.modificarProyecto(request, response);
                     break;
-                case "editarTarea":
-                    this.editarTarea(request, response);
-                    break;
-                case "eliminarTarea":
-                {
-                    try {
-                        this.eliminarTarea(request, response);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(ServletControlador.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                break;
                 default:
                     this.accionDefault(request, response);
             }
@@ -187,6 +190,7 @@ public class ServletControlador extends HttpServlet {
 //        String jspEditar = "/view/paginas/proyecto/editarProyecto.jsp";
 //        request.getRequestDispatcher(jspEditar).forward(request, response);
 //    }
+        
     
     private void editarTarea(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -222,9 +226,8 @@ public class ServletControlador extends HttpServlet {
         
         
         private void eliminarProyecto(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException{
+                throws ServletException, IOException, SQLException{
             
-                 try {
                      //recuperamos los valores del formulario editarCliente
                      int idProyecto = Integer.parseInt(request.getParameter("idProyecto"));
                      
@@ -237,9 +240,6 @@ public class ServletControlador extends HttpServlet {
                      
                      //Redirigimos hacia accion por default
                      this.accionDefault(request, response);
-                 } catch (SQLException ex) {
-                     Logger.getLogger(ServletControlador.class.getName()).log(Level.SEVERE, null, ex);
-                 }
         }
         
         private void insertarTarea(HttpServletRequest request, HttpServletResponse response)

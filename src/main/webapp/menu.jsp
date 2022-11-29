@@ -62,7 +62,7 @@
 
                             <div style="display: block">
                                 <p class="label-modal">Nombre del proyecto</p>
-                                <input name="nombre" style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input" type="text" placeholder="Nombre de la tarea">
+                                <input name="nombre" style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input" type="text" placeholder="Nombre del proyecto">
                             </div>
     
                             <div style="display: block;">

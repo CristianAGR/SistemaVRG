@@ -188,7 +188,7 @@
                         <ul class="container-check">
                             <li>
                                 <c:if test="${proyecto.finalizado == 0}">
-                                    <input class="checkProject" type="checkbox" id="checkFinish" name="finalizado" value="1">
+                                    <input class="checkProject" type="checkbox" id="checkFinish" name="finalizado" value="0">
                                 </c:if>
                                 <c:if test="${proyecto.finalizado == 1}">
                                     <input checked class="checkProject" type="checkbox" id="checkFinish" name="finalizado" value="1">
@@ -219,20 +219,12 @@
                             
                             <div style="display: block;">
                                 <p class="label-modal">Fecha de inicio</p>
-<<<<<<< HEAD
                                 <input name="fechaInicio" style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" required value="${proyecto.fechaInicio}">
-=======
-                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date"  value="${proyecto.fechaInicio}">
->>>>>>> 42cbea22bd7ef820d34578c183b0d210391fd1ff
                             </div>
     
                             <div style="display: block;">
                                 <p class="label-modal">Fecha de finalización</p>
-<<<<<<< HEAD
                                 <input name="fechaFin" style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" value="${proyecto.fechaFin}" >
-=======
-                                <input style="width: 100%;margin-bottom: 1.5rem;" required class="modal-input inpt-date" type="date" value="${proyecto.fechaFin}">
->>>>>>> 42cbea22bd7ef820d34578c183b0d210391fd1ff
                             </div>
                             <div style="display: block;">
                                 <p class="label-modal">Cliente</p>
