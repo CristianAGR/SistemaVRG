@@ -21,6 +21,7 @@ import java.util.List;
 public class EmpleadoDAO {
                     private static final String SQL_SELECT ="SELECT * FROM empleados";
              private static final String SQL_SELECTXID ="SELECT * FROM empleados where idEmpleado=";
+             private static final String SQL_LOGIN ="SELECT * FROM empleados where usuario= ? and contraseña= ?";
     private static final String SQL_INSERT = "INSERT INTO empleados(nombre,genero,rol,idEquipo)VALUES";
     private static final String SQL_DELETE = "DELETE FROM empleados WHERE idEmpleado=";
     
@@ -44,8 +45,11 @@ public class EmpleadoDAO {
             String genero = rs.getString("genero");
             String rol = rs.getString("rol");
             int idEquipo = rs.getInt("idEquipo");
+            String usuario = rs.getString("usuario");
+            String contraseña = rs.getString("contraseña");
             
-            empleado = new Empleado(idEmpleado,nombre,genero, rol,idEquipo);
+            
+            empleado = new Empleado(idEmpleado,nombre,genero, rol,idEquipo, usuario, contraseña);
             empleadolist.add(empleado);
             
             }
@@ -68,13 +72,54 @@ public class EmpleadoDAO {
         return empleadolist;
     }
         
+        public Empleado loginEmpleado(String usuario, String contrasenia){
+        Connection conn=null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Empleado empleado = null;
+         try {
+            conn = getConnection();
+            stmt = conn.prepareStatement(SQL_LOGIN);
+            stmt.setString(1, usuario);
+            stmt.setString(2, contrasenia);
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+            int idEmpleado = rs.getInt("idEmpleado");
+            String nombre = rs.getString("nombre");
+            String genero = rs.getString("genero");
+            String rol = rs.getString("rol");
+            int idEquipo = rs.getInt("idEquipo");   
+            
+            empleado = new Empleado(idEmpleado,nombre,genero, rol, idEquipo, usuario, contrasenia);
+            
+             }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);//Error de SQL
+            
+        }
+        finally{
+            try {
+                close(rs);
+                close(stmt);
+                close(conn);
+            } catch (SQLException ex) {
+                 ex.printStackTrace(System.out);//Error de SQL
+            }
+        
+        }
+        return empleado;
+     }
+
+        
      public String insertar (Empleado empleado){
          String sms ="";
        try { 
            ConexionBD Con = new ConexionBD();
            if (empleado.getNombre() != null) {
                             Con.ConectarBD();
-               Con.sentencia.execute(SQL_INSERT +"('"+empleado.getNombre()+"','"+empleado.getGenero()+"','"+empleado.getRol()+"','"+empleado.getIdEquipo()+"')");
+               Con.sentencia.execute(SQL_INSERT +"('"+empleado.getNombre()+"','"+empleado.getGenero()+"','"+empleado.getRol()+"','"+empleado.getIdEquipo()+"','"+empleado.getUsuario()+"','"+empleado.getContraseña()+"')");
               sms = "Los Datos fueron Insertados con exito";
               Con.DesconectarBD();
            }
@@ -127,8 +172,10 @@ public class EmpleadoDAO {
             String genero = rs.getString("genero");
             String rol = rs.getString("rol");
             int idEquipo = rs.getInt("idEquipo");
+            String usuario = rs.getString("usuario");
+            String contraseña = rs.getString("contraseña");
             
-            empleado = new Empleado(idEmpleado,nombre,genero, rol, idEquipo);
+            empleado = new Empleado(idEmpleado,nombre,genero, rol, idEquipo, usuario, contraseña);
             
              }
             
@@ -151,7 +198,7 @@ public class EmpleadoDAO {
           
      public String actualizar (Empleado empleado){
         String sms ="";
-       String SQL_UPDATE ="UPDATE empleados SET nombre='"+empleado.getNombre()+"',genero='"+empleado.getGenero()+"',rol='"+empleado.getRol()+"',idEquipo='"+empleado.getIdEquipo()+"'  WHERE idEmpleado= "+empleado.getIdEmpleado();
+       String SQL_UPDATE ="UPDATE empleados SET nombre='"+empleado.getNombre()+"',genero='"+empleado.getGenero()+"',rol='"+empleado.getRol()+"',idEquipo='"+empleado.getIdEquipo()+"',usuario='"+empleado.getUsuario()+"',contraseña='"+empleado.getContraseña()+"'  WHERE idEmpleado= "+empleado.getIdEmpleado();
      try { 
             ConexionBD Con=new ConexionBD();
             Con.ConectarBD();

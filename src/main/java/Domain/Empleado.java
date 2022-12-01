@@ -8,6 +8,8 @@ public class Empleado {
     private String genero;
     private String rol;
     private int idEquipo;
+    private String usuario;
+    private String contraseña;
     
     //Constuctores
 
@@ -19,19 +21,23 @@ public class Empleado {
         this.idEmpleado = idEmpleado;
     }
     // insertar
-     public Empleado(String nombre, String genero, String rol, int idEquipo) {
+     public Empleado(String nombre, String genero, String rol, int idEquipo, String usuario, String contraseña) {
         this.nombre = nombre;
         this.genero = genero;
         this.rol = rol;
         this.idEquipo = idEquipo;
+        this.usuario = usuario;
+        this.contraseña = contraseña;
     }
     // editar
-    public Empleado(int idEmpleado, String nombre, String genero, String rol, int idEquipo) {
+    public Empleado(int idEmpleado, String nombre, String genero, String rol, int idEquipo, String usuario, String contraseña) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
         this.genero = genero;
         this.rol = rol;
         this.idEquipo = idEquipo;
+        this.usuario = usuario;
+        this.contraseña = contraseña;
     }
     
 
@@ -75,7 +81,23 @@ public class Empleado {
         this.idEquipo = idEquipo;
     }
     
-        @Override
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+    
+            @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Empleado{");

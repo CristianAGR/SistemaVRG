@@ -75,6 +75,9 @@ public class ServletControlador extends HttpServlet {
         String accion = request.getParameter("accion");
         if (accion != null) {
             switch (accion) {
+                case "login":
+                    this.login(request, response);
+                    break;
                 case "insertarProyecto":
                     this.insertarProyecto(request, response);
                     break;
@@ -95,6 +98,27 @@ public class ServletControlador extends HttpServlet {
         }
     }
     
+        private String login(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //recuperamos el usuario y contraseña
+        String usuario = request.getParameter("usuario");
+        String contrasenia = request.getParameter("contrasenia");
+        String resultado= "Login fallido";
+        try {
+        Empleado empleado = new EmpleadoDAO().loginEmpleado(usuario,contrasenia);
+        
+        if (empleado != null) {
+            resultado = "Login Completado";
+            this.accionDefault(request, response);
+        } else {
+            response.sendRedirect("/SistemaVRG-main/view/paginas/home/login.jsp");
+            
+        }
+        } catch(Exception ex) {
+            resultado= "Login fallido"+ex;
+        }
+        return resultado;
+    }
         private void accionDefault(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
